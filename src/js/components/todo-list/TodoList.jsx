@@ -1,5 +1,6 @@
 import React from 'react'
 import Todo from './todo/Todo';
+import s from '../../../css/modules/todo-list/TodoList.module.css'
 
 export default class TodoList extends React.Component {
     constructor(props) {
@@ -12,13 +13,8 @@ export default class TodoList extends React.Component {
     }
 
     render() {
-        const style = {
-            display: 'flex',
-            justifyContent: 'center'
-        }
-
         return (
-            <div style={style}>
+            <div className={s.todo_list}>
                 <div className="contaner">
                     {this.todos.map(todo => <Todo todo={todo} />)}
                 </div>
