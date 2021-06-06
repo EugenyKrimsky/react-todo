@@ -12,9 +12,16 @@ export default class TodoList extends React.Component {
     }
 
     render() {
+        const style = {
+            display: 'flex',
+            justifyContent: 'center'
+        }
+
         return (
-            <div>
-                {this.todos.map(todo => {return <Todo todo={todo}/>})}
+            <div style={style}>
+                <div className="contaner">
+                    {this.todos.map(todo => <Todo todo={todo} />)}
+                </div>
             </div>
         )
     }
