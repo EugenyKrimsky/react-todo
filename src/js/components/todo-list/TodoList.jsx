@@ -8,7 +8,7 @@ export default class TodoList extends React.Component {
         this.todos = [
             {id: 241234, text: 'buy bread', hasDone: false},
             {id: 432665, text: 'buy milk', hasDone: false},
-            {id: 876457, text: 'buy cheese', hasDone: false},
+            {id: 876457, text: 'buy cheese', hasDone: true},
         ]
     }
 
@@ -16,7 +16,7 @@ export default class TodoList extends React.Component {
         return (
             <div className={s.todo_list}>
                 <div className="contaner">
-                    {this.todos.map(todo => <Todo todo={todo} />)}
+                    {this.todos.map(todo => <Todo todo={todo} key={todo.id}/>)}
                 </div>
             </div>
         )

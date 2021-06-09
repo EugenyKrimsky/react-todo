@@ -13,22 +13,22 @@ export default class Todo extends React.Component {
         this.onClickCheckBox = this.onClickCheckBox.bind(this);
     }
 
-    onClickCheckBox = () => {
-        this.setState(state => ({
-            hasDone: !state.hasDone
-        }))
-    }
-
-    componentDidUpdate() {
-        console.log(s);
-    }
-
     render() {
         return (
             <div className={s.todo}>
-                <input type="checkbox" onChange={this.onClickCheckBox}/>
-                <p style={this.state.hasDone ? {color: 'red' } : {color: 'black'}}>{this.props.todo.text}</p>
+                <input type="checkbox" onClick={this.onClickCheckBox} name="isComplete" defaultChecked={this.state.hasDone}/>
+                <label htmlFor="isComplete" className={this.getStyle()}>{this.props.todo.text}</label>
             </div>
         )
+    }
+
+    onClickCheckBox() {
+        this.setState(state => ({
+            hasDone: !state.hasDone,
+        }));
+    }
+
+    getStyle() {
+        return this.state.hasDone ? s.complited : s.uncomplited
     }
 }
