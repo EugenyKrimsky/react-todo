@@ -29,6 +29,6 @@ export default class Todo extends React.Component {
     }
 
     getStyle() {
-        return this.state.hasDone ? s.complited : s.uncomplited
+        return this.state.hasDone ? s.complited : s.uncomplited;
     }
 }
