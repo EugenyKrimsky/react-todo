@@ -1,38 +1,36 @@
 import React from 'react'
-import Todo from './todo/Todo';
-import NewTodo from './todo/NewTodo';
+import TodoItem from './todo/TodoItem';
+import NewTodoItem from './todo/NewTodoItem';
 import s from '../../../css/modules/todo-list/TodoList.module.css'
 
 export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
-        this.todos = [
-            {id: 241234, text: 'buy bread', hasDone: false},
-            {id: 432665, text: 'buy milk', hasDone: false},
-            {id: 876457, text: 'buy cheese', hasDone: true},
-        ]
+        this.state = {
+            todos: [
+                {id: 0, text: 'buy bread', hasDone: false},
+                {id: 1, text: 'buy milk', hasDone: false},
+                {id: 2, text: 'buy cheese', hasDone: true},
+            ]
+        }
 
-        this.onAddNewTodo = this.onAddNewTodo.bind(this)
+        this.addNewTodoItem = this.addNewTodoItem.bind(this)
     }
 
     render() {
         return (
-            <div className={s.todo_list}>
+            <div className={s.TodoList}>
                 <div className="contaner">
-                    <NewTodo onAddNewTodo={this.onAddNewTodo}/>
-                    {this.todos.map(todo => <Todo todo={todo} key={todo.id}/>)}
+                    <NewTodoItem addNewTodoItem={this.addNewTodoItem} todosLen={this.state.todos.length}/>
+                    {this.state.todos.map(todo => <TodoItem todo={todo} key={todo.id}/>)}
                 </div>
             </div>
         )
     }
 
-    onAddNewTodo(newTodo) {
+    addNewTodoItem(newTodoItem) {
         this.setState(state => ({
-            todos: [...state.todos, newTodo]
+            todos: [...state.todos, newTodoItem]
         }))
-    }
-
-    componentDidUpdate() {
-        console.log(this.state.todos);
     }
 }

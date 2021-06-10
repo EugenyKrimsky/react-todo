@@ -1,7 +1,7 @@
 import React from 'react'
-import s from '../../../../css/modules/todo-list/todo/Todo.module.css'
+import s from '../../../../css/modules/todo-list/todo/TodoItem.module.css'
 
-export default class Todo extends React.Component {
+export default class TodoItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,7 @@ export default class Todo extends React.Component {
 
     render() {
         return (
-            <div className={s.todo}>
+            <div className={s.TodoItem}>
                 <input type="checkbox" onClick={this.onClickCheckBox} name="isComplete" defaultChecked={this.state.hasDone}/>
                 <label htmlFor="isComplete" className={this.getStyle()}>{this.props.todo.text}</label>
             </div>
