@@ -7,14 +7,15 @@ export default class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos: [
-                {id: 0, text: 'buy bread', hasDone: false},
-                {id: 1, text: 'buy milk', hasDone: false},
-                {id: 2, text: 'buy cheese', hasDone: true},
-            ]
+            todos: new Set([
+                {text: 'buy bread', hasDone: false},
+                {text: 'buy milk', hasDone: false},
+                {text: 'buy cheese', hasDone: true}
+            ])
         }
 
-        this.addNewTodoItem = this.addNewTodoItem.bind(this)
+        this.addNewTodoItem = this.addNewTodoItem.bind(this);
+        this.deleteTodoItem = this.deleteTodoItem.bind(this);
     }
 
     render() {
@@ -22,15 +23,25 @@ export default class TodoList extends React.Component {
             <div className={s.TodoList}>
                 <div className="contaner">
                     <NewTodoItem addNewTodoItem={this.addNewTodoItem} todosLen={this.state.todos.length}/>
-                    {this.state.todos.map(todo => <TodoItem todo={todo} key={todo.id}/>)}
+                    {Array(this.state.todos).map(todo => <TodoItem todo={todo} key={todo.id} deleteTodoItem={this.deleteTodoItem}/>)}
                 </div>
             </div>
         )
     }
 
+    deleteTodoItem(todoItem) {
+        this.setState(state => ({
+            todos: state.todos.delete(todoItem)
+        }))
+    }
+
     addNewTodoItem(newTodoItem) {
         this.setState(state => ({
-            todos: [...state.todos, newTodoItem]
+            todos: state.todos.add(newTodoItem)
         }))
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.todos);
     }
 }

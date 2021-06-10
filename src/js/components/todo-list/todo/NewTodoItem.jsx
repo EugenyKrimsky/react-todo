@@ -28,10 +28,16 @@ export default class NewTodoItem extends React.Component {
     }
 
     onAddNewTodoItem() {
-        this.props.addNewTodoItem({
-            id: this.props.todosLen,
-            text: this.state.text,
-            hasDone: false
-        });
+        if (this.state.text !== '') {
+            this.props.addNewTodoItem({
+                id: this.props.todosLen,
+                text: this.state.text,
+                hasDone: false
+            });
+
+            this.setState(state => ({
+                text: ''
+            }))
+        }
     }
 }   

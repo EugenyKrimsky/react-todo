@@ -11,15 +11,23 @@ export default class TodoItem extends React.Component {
         };
         
         this.onClickCheckBox = this.onClickCheckBox.bind(this);
+        this.onDeleteTodoItem = this.onDeleteTodoItem.bind(this);
     }
 
     render() {
         return (
             <div className={s.TodoItem}>
-                <input type="checkbox" onClick={this.onClickCheckBox} name="isComplete" defaultChecked={this.state.hasDone}/>
-                <label htmlFor="isComplete" className={this.getStyle()}>{this.props.todo.text}</label>
+                <div>
+                  <input type="checkbox" onChange={this.onClickCheckBox} name="isComplete" checked={this.state.hasDone}/>
+                  <label htmlFor="isComplete" className={this.getStyle()}>{this.props.todo.text}</label>
+                </div>
+                <input type="button" value="X" onClick={this.onDeleteTodoItem}/>
             </div>
         )
+    }
+
+    onDeleteTodoItem() {
+        this.props.deleteTodoItem(this.state)
     }
 
     onClickCheckBox() {
