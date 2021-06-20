@@ -1,34 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import s from '../../../../css/modules/todo-list/todo/TodoItem.module.css'
 
-export default class TodoItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: this.props.todo.id,
-            text: this.props.todo.text,
-            hasDone: this.props.todo.hasDone,
-        };
+const TodoItem = (props) => {
+    const [todo, setTodo] = useState({
+        id: props.todo.id,
+        text: props.todo.text,
+        complited: props.todo.complited,
+    });
+
+    const className = todo.complited ? s.complited : s.uncomplited
         
-        this.onClickCheckBox = this.onClickCheckBox.bind(this);
+    const onClickCheckBox = () => {
+        setTodo(todo => ({
+            ...todo,
+            complited: !todo.complited
+        }))
     }
 
-    render() {
-        return (
-            <div className={s.TodoItem}>
-                <input type="checkbox" onClick={this.onClickCheckBox} name="isComplete" defaultChecked={this.state.hasDone}/>
-                <label htmlFor="isComplete" className={this.getStyle()}>{this.props.todo.text}</label>
+    const onDeleteTodoItem = () => {
+        props.dispatch('delete', todo);
+    }
+
+    return (
+        <div className={s.TodoItem}>
+            <div>
+                <input type="checkbox" onChange={onClickCheckBox} name="complited" checked={todo.complited}/>
+                <label htmlFor="complited" className={className}>{props.todo.text}</label>
             </div>
-        )
-    }
-
-    onClickCheckBox() {
-        this.setState(state => ({
-            hasDone: !state.hasDone,
-        }));
-    }
-
-    getStyle() {
-        return this.state.hasDone ? s.complited : s.uncomplited;
-    }
+            <input type="button" value="X" onClick={onDeleteTodoItem}/>
+        </div>
+    )
 }
+
+export default TodoItem

@@ -1,37 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from '../../../../css/modules/todo-list/todo/NewTodoItem.module.css'
 
-export default class NewTodoItem extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: ''
-        }
+const NewTodoItem = (props) => {
+    const [text, setText] = useState('')
 
-        this.onChange = this.onChange.bind(this);
-        this.onAddNewTodoItem = this.onAddNewTodoItem.bind(this);
+    const onTypeText = (e) => {
+        setText(e.target.value);
     }
 
-    render() {
-        return (
-            <div className="NewTodoItem-block">
-                <input type="text" value={this.state.text} onChange={this.onChange}/>
-                <input type="button" onClick={this.onAddNewTodoItem}/>
-            </div>
-        )
-    }
-
-    onChange(e) {
-        this.setState(state => ({
-            text: e.target.value
-        }))
-    }
-
-    onAddNewTodoItem() {
-        this.props.addNewTodoItem({
-            id: this.props.todosLen,
-            text: this.state.text,
-            hasDone: false
+    const onAddNewTodoItem = () => {
+       props.dispatch('add', {
+            id: props.todosLen,
+            text: text,
+            complited: false
         });
+        setText('');
     }
+
+    return (
+        <div className="NewTodoItem-block">
+            <input type="text" value={text} onChange={onTypeText}/>
+            <input type="button" onClick={onAddNewTodoItem}/>
+        </div>
+    )
 }   
+
+export default NewTodoItem
