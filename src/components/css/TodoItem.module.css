@@ -1,4 +1,8 @@
 .TodoItem {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(196, 196, 196);
 }

@@ -1,12 +1,12 @@
 import { useState } from "react"
-import c from '../css/TodoItem.css'
+import c from '../css/TodoItem.module.css'
 
 const TodoItem = props => {
 
     return (
-        <div className="TodoItem">
-            <input type="checkbox"/>
+        <div className={c.TodoItem}>
             <p>{props.todo.text}</p>
+            <input type="checkbox"/>
         </div>
     )
     
